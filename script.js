@@ -2,9 +2,9 @@ function adjustFontSize(content) {
   const textLength = content.value.length;
   let fontSize = 48; // 기본 폰트 크기
 
-  if (textLength >= 22) {
+  if (textLength > 25) {
     fontSize = 24; // 텍스트 길이가 22 이상일 경우
-  } else if (textLength >= 18) {
+  } else if (textLength > 20) {
     fontSize = 36; // 텍스트 길이가 18 이상일 경우
   }
 
@@ -48,4 +48,13 @@ function reset() {
 function patch() {
   const msg = "아직이요";
   alert(msg);
+}
+
+function rest(content) {
+  const matchtext = ["휴", "-휴-", "휴방", "-휴방-", "휴뱅", "-휴뱅-", "연어", "-연어-"];
+  if (matchtext.includes(content.value)) {
+    content.classList.add('rest');
+  } else {
+    content.classList.remove('rest');
+  }
 }
