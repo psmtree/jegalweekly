@@ -3,10 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>주간금자</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon">
+    <script src='script.js' defer></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" defer></script>
+    <style>
+    </style>
 </head>
 <body>
-    <h1>Hello World!!!</h1>
-    <img src="img/jegalsilver.png" width="500" alt="아 이거 고쳐야되는데">
+    <header>
+        <a href="/">
+            <img src="img/logo1.png" class="logo" alt="오류에요">
+        </a>
+        <div class="blank"></div>
+        <button class="patch button1" onclick="patch()">
+            <h4>패치노트</h4>
+            <img src="img/update.png" alt="">
+        </button>
+        <div class="buttons">
+            <input class="button1" type="button" value="초기화" onclick="reset()">
+            <input class="button2" type="button" value="저장하기">
+        </div>
+    </header>
+    <div class="weekly" id="capture">    <!-- 전체, 캡쳐할 공간 -->
+        <div class="week">  <!-- 몇월 몇주차 -->
+            <h1>12월 2주차</h1>
+        </div>
+        <div class="schedule">  <!-- 일정표, 여기서 7개로 나눔-->
+             <div class="day">   <!-- 월요일, 날짜와 일정으로 나눔 -->
+                <div class="date">  <!-- 날짜 표시 -->
+                    <h4 class="date1 date2">월</h4>
+                    <h2 class="date1">9</h2>
+                </div>
+                <input type="text" class="content func" id="input-1" oninput="adjustFontSize(this)">
+            </div>
+
+            <div class="day">   <!-- 화요일, 날짜와 일정으로 나눔 -->
+                <div class="date">  <!-- 날짜 표시 -->
+                    <h4 class="date1 date2">화</h4>
+                    <h2 class="date1">10</h2>
+                </div>
+                <input type="text" class="content func" id="input-2" oninput="adjustFontSize(this)">
+            </div>
+
+            <div class="day">   <!-- 수요일, 날짜와 일정으로 나눔 -->
+                <div class="date">  <!-- 날짜 표시 -->
+                    <h4 class="date1 date2">수</h4>
+                    <h2 class="date1">11</h2>
+                </div>
+                <input type="text" class="content func" id="input-3" oninput="adjustFontSize(this)">
+            </div>
+
+            <div class="day">   <!-- 목요일, 날짜와 일정으로 나눔 -->
+                <div class="date">  <!-- 날짜 표시 -->
+                    <h4 class="date1 date2">목</h4>
+                    <h2 class="date1">12</h2>
+                </div>
+                <input type="text" class="content func" id="input-4" oninput="adjustFontSize(this)">
+            </div>
+
+            <div class="day">   <!-- 금요일, 날짜와 일정으로 나눔 -->
+                <div class="date">  <!-- 날짜 표시 -->
+                    <h4 class="date1 date2">금</h4>
+                    <h2 class="date1">13</h2>
+                </div>
+                <input type="text" class="content func" id="input-5" oninput="adjustFontSize(this)">
+            </div>
+
+            <div class="day">   <!-- 토요일, 날짜와 일정으로 나눔 -->
+                <div class="date">  <!-- 날짜 표시 -->
+                    <h4 class="date1 date2">토</h4>
+                    <h2 class="date1">14</h2>
+                </div>
+                <input type="text" class="content func" id="input-6" oninput="adjustFontSize(this)">
+            </div>
+
+            <div class="day">   <!-- 일요일, 날짜와 일정으로 나눔 -->
+                <div class="date">  <!-- 날짜 표시 -->
+                    <h4 class="date1 date2">일</h4>
+                    <h2 class="date1">15</h2>
+                </div>
+                <input type="text" class="content func" id="input-7" oninput="adjustFontSize(this)">
+            </div>
+            
+
+        </div>
+        <div class="notice">
+            <h2 class="note1">이번주 공지</h2>
+            <input type="text" class="note2 func" id="input-8" oninput="adjustFontSize(this)">
+
+
+
+        </div>
+
+    </div>
+
 </body>
 </html>
