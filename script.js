@@ -1,10 +1,10 @@
 function adjustFontSize(content) {
-  const textLength = content.value.length;
+  const textLength = content.innerText.length;
   let fontSize = 48; // 기본 폰트 크기
 
   if (textLength > 25) {
     fontSize = 24; // 텍스트 길이가 22 이상일 경우
-  } else if (textLength > 20) {
+  } else if (textLength > 16) {
     fontSize = 36; // 텍스트 길이가 18 이상일 경우
   }
 
@@ -13,7 +13,7 @@ function adjustFontSize(content) {
 
   // id를 기준으로 LocalStorage에 저장
   const inputId = content.id; // 입력 창의 id
-  localStorage.setItem(inputId + '_text', content.value);
+  localStorage.setItem(inputId + '_text', content.innerText);
   localStorage.setItem(inputId + '_fontSize', fontSize + 'px');
 }
 
@@ -26,7 +26,7 @@ window.onload = function () {
     const savedFontSize = localStorage.getItem(inputId + '_fontSize');
 
     if (savedText) {
-      content.value = savedText; // 텍스트 복원
+      content.innerText = savedText; // 텍스트 복원
     }
     if (savedFontSize) {
       content.style.fontSize = savedFontSize; // 폰트 크기 복원
@@ -39,9 +39,12 @@ function reset() {
   if (confirm(msg) == true) {
     const inputs = document.querySelectorAll('.func');
     inputs.forEach(inputs => {
-      inputs.value = "";
+      inputs.innerText = "";
     });
     localStorage.clear();
+    
+    location.reload();
+
   };
 }
 
@@ -52,9 +55,41 @@ function patch() {
 
 function rest(content) {
   const matchtext = ["휴", "-휴-", "휴방", "-휴방-", "휴뱅", "-휴뱅-", "연어", "-연어-"];
-  if (matchtext.includes(content.value)) {
+  if (matchtext.includes(content.innerText)) {
     content.classList.add('rest');
   } else {
     content.classList.remove('rest');
   }
 }
+
+function capture() {
+  const element = document.getElementById("capture");
+
+  html2canvas(element, {
+    allowTaint: true,
+  }).then(canvas => {
+    document.querySelector(".capturepreview").appendChild(canvas);
+  });
+  document.querySelector(".capturepreview").style.display = 'flex';
+};
+
+function closeCapture() {
+  document.querySelector(".capturepreview").style.display = 'none';
+  
+  const capturePreview = document.querySelector(".capturepreview");
+
+  // 이전 캡처된 canvas 요소를 삭제
+  const existingCanvas = capturePreview.querySelector('canvas');
+  if (existingCanvas) {
+    capturePreview.removeChild(existingCanvas);
+  }
+};
+
+
+function showPatch() {
+  document.querySelector(".patchnote").style.display = 'flex';
+};
+
+function closePatch() {
+  document.querySelector(".patchnote").style.display = 'none';
+};

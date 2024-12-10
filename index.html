@@ -20,12 +20,12 @@
             <img src="img/logo1.png" class="logo" alt="오류에요">
         </a>
         <div class="buttons">
-            <button class="patch button1" onclick="patch()">
+            <button class="patch button1" onclick="showPatch()">
                 <h4>패치노트</h4>
                 <img src="img/update.png" alt="">
             </button>
             <input class="button1" type="button" value="초기화" onclick="reset()">
-            <input class="button2" type="button" value="저장하기">
+            <input class="button2" type="button" value="저장하기" onclick="capture()">
         </div>
     </header>
     <div class="schedule" id="capture">    <!-- 전체, 캡쳐할 공간 -->
@@ -39,44 +39,57 @@
             <div class="day">   <!-- 월요일, 날짜와 일정으로 나눔 -->
                 <h2 class="gradienttext dayname">월</h2>
                 <hr>
-                <input type="text" class="content func" id="input-1" oninput="adjustFontSize(this); rest(this);">
+                <div contenteditable="true" class="content func" id="input-1" oninput="adjustFontSize(this); rest(this);"></div>
             </div>
             <div class="day">   <!-- 월요일, 날짜와 일정으로 나눔 -->
                 <h2 class="gradienttext dayname">화</h2>
                 <hr>
-                <input type="text" class="content func" id="input-2" oninput="adjustFontSize(this); rest(this);">
+                <div contenteditable="true" class="content func" id="input-2" oninput="adjustFontSize(this); rest(this);"></div>
             </div>
             <div class="day">   <!-- 월요일, 날짜와 일정으로 나눔 -->
                 <h2 class="gradienttext dayname">수</h2>
                 <hr>
-                <input type="text" class="content func" id="input-3" oninput="adjustFontSize(this); rest(this);">
+                <div contenteditable="true" class="content func" id="input-3" oninput="adjustFontSize(this); rest(this);"></div>
             </div>
             <div class="day">   <!-- 월요일, 날짜와 일정으로 나눔 -->
                 <h2 class="gradienttext dayname">목</h2>
                 <hr>
-                <input type="text" class="content func" id="input-4" oninput="adjustFontSize(this); rest(this);">
+                <div contenteditable="true" class="content func" id="input-4" oninput="adjustFontSize(this); rest(this);"></div>
             </div>
             <div class="day">   <!-- 월요일, 날짜와 일정으로 나눔 -->
                 <h2 class="gradienttext dayname">금</h2>
                 <hr>
-                <input type="text" class="content func" id="input-5" oninput="adjustFontSize(this); rest(this);">
+                <div contenteditable="true" class="content func" id="input-5" oninput="adjustFontSize(this); rest(this);"></div>
             </div>
             <div class="day">   <!-- 월요일, 날짜와 일정으로 나눔 -->
                 <h2 class="gradienttext dayname">토</h2>
                 <hr>
-                <input type="text" class="content func" id="input-6" oninput="adjustFontSize(this); rest(this);">
+                <div contenteditable="true" class="content func" id="input-6" oninput="adjustFontSize(this); rest(this);"></div>
             </div>
             <div class="day">   <!-- 월요일, 날짜와 일정으로 나눔 -->
                 <h2 class="gradienttext dayname">일</h2>
                 <hr>
-                <input type="text" class="content func" id="input-7" oninput="adjustFontSize(this); rest(this);">
+                <div contenteditable="true" class="content func" id="input-7" oninput="adjustFontSize(this); rest(this);"></div>
             </div>            
 
         </div>
         <div class="notice">
-            <input type="text" class="content func gray" placeholder="*늘 변동될 수 있음" id="input-8" oninput="adjustFontSize(this)">
+            <div contenteditable="true" class="note func" placeholder="" id="input-8" oninput="adjustFontSize(this)">*늘 변동될 수 있음</div>
         </div>
 
+    </div>
+    <div class="patchnote">
+        <div class="patchimgs">
+            <img src="img/close.svg" alt="닫기" class="closecapture" onclick="closePatch()">
+            <img src="patch/1.png" class="patchimg" alt="">
+            <!-- <img src="patch/2.png" class="patchimg" alt=""> -->
+            <img src="patch/3.png" class="patchimg" alt="">
+            <!-- <img src="patch/4.png" class="patchimg" alt=""> -->
+        </div>
+        <div class="patchinfo"><h3>한번 만들어 보고 있습니다.<br>글씨색, 일정표 배경도 추가해보겠습니다.<br>업데이트 시기 = 챗지피티 성능과 비례</h3></div>
+    </div>
+    <div class="capturepreview">
+        <img src="img/close.svg" alt="닫기" class="closecapture" onclick="closeCapture()">
     </div>
 
 </body>
