@@ -45,13 +45,7 @@ function reset() {
     
     location.reload();
 
-  };
-}
-
-function patch() {
-  const msg = "아직이요";
-  alert(msg);
-}
+}};
 
 function rest(content) {
   const matchtext = ["휴", "-휴-", "휴방", "-휴방-", "휴뱅", "-휴뱅-", "연어", "-연어-"];
@@ -59,11 +53,11 @@ function rest(content) {
     content.classList.add('rest');
   } else {
     content.classList.remove('rest');
-  }
-}
+}};
 
-function capture() {
+function capture() { //캡쳐도구
   const element = document.getElementById("capture");
+  element.style.background = "linear-gradient(#FFFAFA, #FFD6D6)";
 
   html2canvas(element, {
     allowTaint: true,
@@ -73,23 +67,60 @@ function capture() {
   document.querySelector(".capturepreview").style.display = 'flex';
 };
 
+
 function closeCapture() {
   document.querySelector(".capturepreview").style.display = 'none';
-  
+
+  const element = document.getElementById("capture");
+  element.style.removeProperty("background");
+
   const capturePreview = document.querySelector(".capturepreview");
 
   // 이전 캡처된 canvas 요소를 삭제
   const existingCanvas = capturePreview.querySelector('canvas');
   if (existingCanvas) {
     capturePreview.removeChild(existingCanvas);
-  }
-};
+}};
 
 
-function showPatch() {
+function showPatch(event) {
+  event.stopPropagation(); // 클릭 이벤트가 상위 요소로 전파되지 않도록 차단
   document.querySelector(".patchnote").style.display = 'flex';
 };
 
-function closePatch() {
-  document.querySelector(".patchnote").style.display = 'none';
-};
+// function closePatch() {
+//   document.querySelector(".patchnote").style.display = 'none';
+// };
+
+document.addEventListener("click", (e) => {
+  const patchnote = document.querySelector(".patchnote");
+  if (document.querySelector(".patchnote").style.display === 'flex') {
+    const existingPatchnote = patchnote.querySelector('.patchinfo');
+    if (!existingPatchnote.contains(e.target)) {
+    document.querySelector(".patchnote").style.display = 'none';
+}}});
+
+
+document.addEventListener("click", (e) => {
+  const capturePreview = document.querySelector(".capturepreview");
+  const existingCanvas = capturePreview.querySelector('canvas');
+
+  if (existingCanvas) {
+    if (!existingCanvas.contains(e.target)) {
+      capturePreview.removeChild(existingCanvas);
+      document.querySelector(".capturepreview").style.display = 'none';
+  }};
+  const element = document.getElementById("capture");
+  element.style.removeProperty("background");
+});
+
+
+
+window.addEventListener('scroll', () => {
+  const header = document.querySelector('header');
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
