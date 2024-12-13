@@ -1,3 +1,4 @@
+// 일정 입력 시 폰트 크기 조절
 function adjustFontSize(content) {
   const textLength = content.innerText.length;
   let fontSize = 48; // 기본 폰트 크기
@@ -17,6 +18,8 @@ function adjustFontSize(content) {
   localStorage.setItem(inputId + '_fontSize', fontSize + 'px');
 }
 
+
+
 // 페이지 로드 시, 저장된 텍스트와 폰트 크기 불러오기
 window.onload = function () {
   const inputs = document.querySelectorAll('.func');
@@ -34,6 +37,8 @@ window.onload = function () {
   });
 };
 
+
+// 초기화 기능
 function reset() {
   let msg = "모든 내용을 삭제할까요?";
   if (confirm(msg) == true) {
@@ -47,6 +52,9 @@ function reset() {
 
 }};
 
+
+
+//휴뱅 입력 시 글씨 색 변경
 function rest(content) {
   const matchtext = ["휴", "-휴-", "휴방", "-휴방-", "휴뱅", "-휴뱅-", "연어", "-연어-"];
   if (matchtext.includes(content.innerText)) {
@@ -55,7 +63,10 @@ function rest(content) {
     content.classList.remove('rest');
 }};
 
-function capture() { //캡쳐도구
+
+
+// 캡쳐 도구
+function capture() {
   const element = document.getElementById("capture");
   element.style.background = "linear-gradient(#FFFAFA, #FFD6D6)";
 
@@ -65,33 +76,33 @@ function capture() { //캡쳐도구
     document.querySelector(".capturepreview").appendChild(canvas);
   });
   document.querySelector(".capturepreview").style.display = 'flex';
-};
-
-
-function closeCapture() {
-  document.querySelector(".capturepreview").style.display = 'none';
-
-  const element = document.getElementById("capture");
   element.style.removeProperty("background");
-
-  const capturePreview = document.querySelector(".capturepreview");
-
-  // 이전 캡처된 canvas 요소를 삭제
-  const existingCanvas = capturePreview.querySelector('canvas');
-  if (existingCanvas) {
-    capturePreview.removeChild(existingCanvas);
-}};
-
-
-function showPatch(event) {
-  event.stopPropagation(); // 클릭 이벤트가 상위 요소로 전파되지 않도록 차단
-  document.querySelector(".patchnote").style.display = 'flex';
 };
 
-// function closePatch() {
-//   document.querySelector(".patchnote").style.display = 'none';
-// };
 
+
+// 캡처 화면 닫기
+document.addEventListener("click", (e) => {
+  const capturePreview = document.querySelector(".capturepreview");
+  const existingCanvas = capturePreview.querySelector('canvas');
+
+  if (existingCanvas) {
+    if (!existingCanvas.contains(e.target)) {
+      capturePreview.removeChild(existingCanvas);
+      document.querySelector(".capturepreview").style.display = 'none';
+}}});
+
+
+
+// 패치노트 열기
+document.querySelector('.patch').addEventListener('click', (e) => {
+  e.stopPropagation();
+  document.querySelector(".patchnote").style.display = 'flex';
+});
+
+
+
+// 패치노트 닫기
 document.addEventListener("click", (e) => {
   const patchnote = document.querySelector(".patchnote");
   if (document.querySelector(".patchnote").style.display === 'flex') {
@@ -101,21 +112,8 @@ document.addEventListener("click", (e) => {
 }}});
 
 
-document.addEventListener("click", (e) => {
-  const capturePreview = document.querySelector(".capturepreview");
-  const existingCanvas = capturePreview.querySelector('canvas');
 
-  if (existingCanvas) {
-    if (!existingCanvas.contains(e.target)) {
-      capturePreview.removeChild(existingCanvas);
-      document.querySelector(".capturepreview").style.display = 'none';
-  }};
-  const element = document.getElementById("capture");
-  element.style.removeProperty("background");
-});
-
-
-
+// 스크롤 시 헤더 속성 변경
 window.addEventListener('scroll', () => {
   const header = document.querySelector('header');
   if (window.scrollY > 50) {
