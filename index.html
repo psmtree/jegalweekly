@@ -3,102 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>주간금자</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon">
-    <script src='script.js' defer></script>
+    <link rel="icon" href="media/favicon.ico" />
+    <script src="script.js" defer></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" defer></script>
-    <style>
-    </style>
+    <title>제갈금자 일정표</title>
 </head>
 <body>
     <video class="bga" autoplay loop muted playsinline>
-        <source src="img/jegalweeklybg.mp4" type="video/mp4">
+        <source src="media/bga.mp4" type="video/mp4" />
     </video>
-    
+
+
     <header>
         <a href="/">
-            <img src="img/logo1.png" class="logo" alt="오류에요">
+            <img src="media/logo1.png" class="logo" alt="오류" />
         </a>
-        <div class="buttons">
-            <button class="patch button1" value="패치노트">
-                <h4 style="font-family: paperlogy3; font-size: 20px;">패치노트</h4>
-                <img src="img/update.png" alt="">
+
+        <div class="bttn">
+            <button class="bttn-patch">
+                <h5>패치노트</h5>
+                <img class="newpatch" src="media/update.png" alt="" />
             </button>
-            <input class="button1" type="button" value="초기화" onclick="reset()">
-            <input class="button2" type="button" value="저장하기" onclick="capture()">
+            <button class="bttn-reset">
+                <h5>초기화</h5>
+            </button>
+            <button class="bttn-save">
+                <h5>저장</h5>
+            </button>
+
         </div>
     </header>
-    
-    <div class="schedule" id="capture">    <!-- 전체, 캡쳐할 공간 -->
-        <div class="title stroke">  <!-- 몇월 몇주차 -->
-            <h1><span class="gradienttext">제갈금자</span> 일정표</h1>
-        </div>
 
-        <div class="week">  <!-- 일정표, 여기서 7개로 나눔-->
-            <div class="day">   <!-- 월요일, 날짜와 일정으로 나눔 -->
-                <h2 class="gradienttext dayname">월</h2>
+    <div class="schedule" id="capture">
+        <h1 class="title"><span class="gradienttext">제갈금자</span> 일정표</h1>
+        <div class="week">
+            <div class="day">
+                <h2 class="name">월</h2>
                 <hr>
                 <div contenteditable="true" class="content func" id="input-1" oninput="adjustFontSize(this); rest(this);"></div>
             </div>
-            <div class="day">   <!-- 월요일, 날짜와 일정으로 나눔 -->
-                <h2 class="gradienttext dayname">화</h2>
+            
+            <div class="day">
+                <h2 class="name">화</h2>
                 <hr>
                 <div contenteditable="true" class="content func" id="input-2" oninput="adjustFontSize(this); rest(this);"></div>
             </div>
-            <div class="day">   <!-- 월요일, 날짜와 일정으로 나눔 -->
-                <h2 class="gradienttext dayname">수</h2>
+            
+            <div class="day">
+                <h2 class="name">수</h2>
                 <hr>
                 <div contenteditable="true" class="content func" id="input-3" oninput="adjustFontSize(this); rest(this);"></div>
             </div>
-            <div class="day">   <!-- 월요일, 날짜와 일정으로 나눔 -->
-                <h2 class="gradienttext dayname">목</h2>
+            
+            <div class="day">
+                <h2 class="name">목</h2>
                 <hr>
                 <div contenteditable="true" class="content func" id="input-4" oninput="adjustFontSize(this); rest(this);"></div>
             </div>
-            <div class="day">   <!-- 월요일, 날짜와 일정으로 나눔 -->
-                <h2 class="gradienttext dayname">금</h2>
+            
+            <div class="day">
+                <h2 class="name">금</h2>
                 <hr>
                 <div contenteditable="true" class="content func" id="input-5" oninput="adjustFontSize(this); rest(this);"></div>
             </div>
-            <div class="day">   <!-- 월요일, 날짜와 일정으로 나눔 -->
-                <h2 class="gradienttext dayname">토</h2>
+            
+            <div class="day">
+                <h2 class="name">토</h2>
                 <hr>
                 <div contenteditable="true" class="content func" id="input-6" oninput="adjustFontSize(this); rest(this);"></div>
             </div>
-            <div class="day">   <!-- 월요일, 날짜와 일정으로 나눔 -->
-                <h2 class="gradienttext dayname">일</h2>
+            
+            <div class="day">
+                <h2 class="name">일</h2>
                 <hr>
                 <div contenteditable="true" class="content func" id="input-7" oninput="adjustFontSize(this); rest(this);"></div>
-            </div>            
+            </div>
         </div>
+
         <div class="notice">
-            <div contenteditable="true" class="note func" placeholder="" id="input-8" oninput="adjustFontSize(this)">*늘 변동될 수 있음</div>
+            <div contenteditable="true" class="note func" id="input-8" oninput="adjustFontSize(this);">*늘 변동될 수 있음</div>
         </div>
     </div>
 
-    <div class="credit">제작: 코카에이드 / 배경영상: FRAME - 제갈금자 COVER</div>
-
-
-    <div class="patchnote">
-        <div class="patchinfo">
-            <h3>버전 0.3.2 패치노트</h3>
-            <h4>- 일정표를 작성하고 <span style="color: #273BE2;">이미지로 저장/복사</span>할 수 있습니다.</h4>
-            <h4>- 작성한 <span style="color: #273BE2;">내용을 자동으로 저장</span>하고 페이지 시작 시에 불러옵니다.</h4>
-            <h4>- 초기화를 통해 작성한 내용을 전부 삭제할 수 있습니다.</h4>
-            <br>
-            <h4>*복사한 이미지를 게시글에 붙여넣을 수 없는 경우 아래 방법을 이용해주세요.</h4>
-            <h4>1. 복사한 이미지를 그림판에 붙여넣기</h4>
-            <h4>2. 그림판 전체 선택 + 복사</h4>
-            <h4>3. 다시 게시글에 붙여넣기</h4>
-            <h4>**빠르게 고치겠습니다.</h4>
-            <br>
-            <h4>피드백 주신다면 너무 감사드리겠습니다.</h4>
-            <p style="color: #5C5C5C;">작성한 코드는 금펠 게시글 내 링크를 통해 확인할 수 있습니다.</p>
-            <a href="https://cafe.naver.com/geumpeltown/25598">피드백은 댓글로</a>
-        </div>
+    <div class="patch">
+        <div class="patchnote"></div>
     </div>
+
     <div class="capturepreview"></div>
 
+    <div class="credit">제작: 코카에이드 / 배경영상: FRAME - 제갈금자 COVER</div>
 </body>
 </html>

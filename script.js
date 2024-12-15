@@ -1,4 +1,4 @@
-// 일정 입력 시 폰트 크기 조절
+// 일정 입력 시 폰트 크기 조절 /
 function adjustFontSize(content) {
   const textLength = content.innerText.length;
   let fontSize = 48; // 기본 폰트 크기
@@ -16,11 +16,11 @@ function adjustFontSize(content) {
   const inputId = content.id; // 입력 창의 id
   localStorage.setItem(inputId + '_text', content.innerText);
   localStorage.setItem(inputId + '_fontSize', fontSize + 'px');
-}
+};
 
 
 
-// 페이지 로드 시, 저장된 텍스트와 폰트 크기 불러오기
+// 페이지 로드 시, 저장된 텍스트와 폰트 크기 불러오기 /
 window.onload = function () {
   const inputs = document.querySelectorAll('.func');
   inputs.forEach(content => {
@@ -38,8 +38,8 @@ window.onload = function () {
 };
 
 
-// 초기화 기능
-function reset() {
+// 초기화 기능 /
+document.querySelector('.bttn-reset').addEventListener('click', (e) => {
   let msg = "모든 내용을 삭제할까요?";
   if (confirm(msg) == true) {
     const inputs = document.querySelectorAll('.func');
@@ -49,12 +49,11 @@ function reset() {
     localStorage.clear();
     
     location.reload();
-
-}};
-
+}});
 
 
-//휴뱅 입력 시 글씨 색 변경
+
+//휴뱅 입력 시 글씨 색 변경 /
 function rest(content) {
   const matchtext = ["휴", "-휴-", "휴방", "-휴방-", "휴뱅", "-휴뱅-", "연어", "-연어-"];
   if (matchtext.includes(content.innerText)) {
@@ -65,8 +64,8 @@ function rest(content) {
 
 
 
-// 캡쳐 도구
-function capture() {
+// 캡쳐 도구 /
+document.querySelector('.bttn-save').addEventListener('click', (e) => {
   const element = document.getElementById("capture");
   element.style.background = "linear-gradient(#FFFAFA, #FFD6D6)";
 
@@ -77,11 +76,11 @@ function capture() {
   });
   document.querySelector(".capturepreview").style.display = 'flex';
   element.style.removeProperty("background");
-};
+});
 
 
 
-// 캡처 화면 닫기
+// 캡처 화면 닫기 /
 document.addEventListener("click", (e) => {
   const capturePreview = document.querySelector(".capturepreview");
   const existingCanvas = capturePreview.querySelector('canvas');
@@ -94,26 +93,36 @@ document.addEventListener("click", (e) => {
 
 
 
-// 패치노트 열기
-document.querySelector('.patch').addEventListener('click', (e) => {
+// 패치노트 열기 /
+document.querySelector('.bttn-patch').addEventListener('click', (e) => {
   e.stopPropagation();
-  document.querySelector(".patchnote").style.display = 'flex';
+  document.querySelector(".patch").style.display = 'flex';
+  document.body.style.overflow = 'hidden'; // body의 스크롤 비활성화
 });
 
 
+// 패치노트 내용 불러오기
+fetch('patchnote.txt')
+  .then(response => response.text())
+  .then(data => {
+    document.querySelector('.patchnote').innerHTML = data;
+  })
+  .catch(error => console.log('Error:', error));
 
-// 패치노트 닫기
+
+// 패치노트 닫기 /
 document.addEventListener("click", (e) => {
-  const patchnote = document.querySelector(".patchnote");
-  if (document.querySelector(".patchnote").style.display === 'flex') {
-    const existingPatchnote = patchnote.querySelector('.patchinfo');
+  const patchnote = document.querySelector(".patch");
+  if (document.querySelector(".patch").style.display === 'flex') {
+    const existingPatchnote = patchnote.querySelector('.patchnote');
     if (!existingPatchnote.contains(e.target)) {
-    document.querySelector(".patchnote").style.display = 'none';
+    document.querySelector(".patch").style.display = 'none';
+    document.body.style.overflow = 'auto'; // body의 스크롤 복원
 }}});
 
 
 
-// 스크롤 시 헤더 속성 변경
+// 스크롤 시 헤더 속성 변경 /
 window.addEventListener('scroll', () => {
   const header = document.querySelector('header');
   if (window.scrollY > 50) {
